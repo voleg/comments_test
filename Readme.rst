@@ -51,7 +51,8 @@ Edit::
   X-Token: 1
 
   {
-    'token': 'token',
+    'object_name': 'name',
+    'object_id': 'id',
     'title': 'title',
     'body': 'body_text'
   }

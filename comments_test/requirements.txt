@@ -1,0 +1,11 @@
+django
+djangorestframework
+django-treebeard
+gunicorn
+
+
+# Code linting
+pylint
+pylint-common
+pylint-fields
+pylint-mccabe
