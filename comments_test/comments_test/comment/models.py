@@ -29,3 +29,14 @@ class Comment(MP_Node, TimeStampableMixin):
 
     def __str__(self):
         return 'Comment: {}'.format(self.title)
+
+
+class CommentController(object):
+
+    def create(self, validated_data: dict):
+        pass
+
+    def update(self,
+               instance: Comment,
+               validated_data: dict):
+        pass
