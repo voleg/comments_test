@@ -1,36 +1,77 @@
 An example comments backend
 ===========================
 
-TODO
-====
+Iterations
+----------
 
-Part 1
-------
+1. Choosing a technology stack:
 
-#. Every comment binds to concrete user.
-#. Comments could be created, edited or deleted.
-#. Comments can not be deleted if there are any nested comments.
-#. Comments has a tree structure, there are no limits on depth of nesting.
-#. Every comment connected to some Entity (Blog post, other comment, etc) identified by object_type_id, object_id pair.
-#. Service should provide interfaces for:
-   - Create a comment, on some Entity (specifying some entity in request)
-   - Edit a comment by ID
-   - Get a first level comments with pagination
-   - Extracting all child comments without nesting limits for given comment ID (the response to a client should be easily reconstructible including nesting)
-   - Retrieving of full branch of comments by specifying a root, root could be an entity or a comment ID that is root for given branch
-   - Retrieving a history of comments for given user
-   - Dumping to a file (XML) of all comments history for user or for an entity in given date time interval. The response time for initial request must not depend on volume if data in resulting dump
-   - Viewing a dump requests history with ability to re download same dump
-#. Response time is limited to 1s
+This could be done in various ways ...
 
-Part 2
-------
+- asynio, aiohttp, sqlalchemy, aiopg
+- flask, flask-restfull, sqlalchemy
+- django, djangorestframework
 
-#. Implement a history data storing (information on who and when some one edit/delete a comment and a comment diff) with ability to get this data for concrete comment
-#. Implement an ability to subscribe to events on some entity comments (on comment create/edit/delete send a PUSH notification to client in the way client could represent it in interface)
-#. For comments dump implement flexible mechanism with ability to add different file types
 
-notes
------
-- there is no need in authentication/authorization in backend level, all user data may be transferred in request param 
-- the relational DB should be used for this solution
+2. Design the way tree structures could be stored in SQL
+
+- sqlalchemy-mptt
+- django-mptt
+- django-treebeard
+
+
+3. API design:
+
+Create API::
+
+  POST /api/comment/ HTTP/1.1
+  Host: example.com
+  Accept: application/json, text/javascript
+  X-Token: 1
+
+  {
+    'object_name': 'name',
+    'object_id': 'id',
+    'title': 'title',
+    'body': 'body_text',
+  }
+
+  HTTP/1.1 200 OK
+  Vary: Accept
+  Content-Type: text/javascript
+
+  { 'comment_id': 'id' }
+
+
+Edit::
+
+  PUT /api/comment/<id>/edit HTTP/1.1
+  Host: example.com
+  Accept: application/json, text/javascript
+  X-Token: 1
+
+  {
+    'token': 'token',
+    'title': 'title',
+    'body': 'body_text'
+  }
+
+  HTTP/1.1 200 OK
+  Vary: Accept
+  Content-Type: text/javascript
+
+  { 'detail': 'OK' }
+
+Delete::
+
+  DELETE /api/comment/<id> HTTP/1.1
+  Host: example.com
+  Accept: application/json, text/javascript
+  X-Token: 1
+
+  HTTP/1.1 200 OK
+  Vary: Accept
+  Content-Type: text/javascript
+
+  { 'detail': 'OK' }
+
