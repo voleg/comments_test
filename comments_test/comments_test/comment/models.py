@@ -1,19 +1,24 @@
 from django.db import models
-from treebeard.mp_tree import MP_Node
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
+from rest_framework import exceptions
+from treebeard.mp_tree import MP_Node
 
+from comments_test.core.models import TimeStampableMixin
 
 __all__ = ['Comment']
 
 
-class TimeStampableMixin(models.Model):
-    created = models.DateTimeField(auto_now_add=True)
-    modified = models.DateTimeField(auto_now=True)
+class CommentableMixin(models.Model):
+    enable_comments = models.BooleanField('Comments enabled', default=True)
+
+    def comments_enabled(self):
+        return self.enable_comments
 
     class Meta:
         abstract = True
+
 
 
 class Comment(MP_Node, TimeStampableMixin):

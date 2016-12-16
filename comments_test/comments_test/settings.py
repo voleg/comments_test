@@ -18,7 +18,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'treebeard',
-    'comments_test.comment'
+    'comments_test.core',
+    'comments_test.comment',
+    'comments_test.blog'
+
 ]
 
 MIDDLEWARE = [
