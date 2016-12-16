@@ -36,6 +36,21 @@ class Comment(MP_Node, TimeStampableMixin):
         return 'Comment: {}'.format(self.title)
 
 
+class Report(TimeStampableMixin, models.Model):
+    STATUSES = (
+        (0, 'new'),
+        (1, 'running'),
+        (2, 'ok'),
+        (3, 'error')
+    )
+    owner = models.ForeignKey(User, related_name='reports')
+    _file = models.FileField(upload_to='data/%Y/%m/%d')
+    status = models.IntegerField(choices=STATUSES, default=0)
+
+    def __str__(self):
+        return 'Report for {} #{}'.format(self.owner, self.pk)
+
+
 class CommentController(object):
 
     def create(self, validated_data: dict):
