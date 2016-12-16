@@ -1,6 +1,7 @@
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+HOME_DIR = os.path.expanduser('~')
 
 SECRET_KEY = '0l(i#p4l9kafd_9fjd*owev@xa+_d!47gflhby+&3$%+txbvi@'
 
@@ -102,6 +103,10 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
+
+MEDIA_URL = '/storage/'
+MEDIA_ROOT = HOME_DIR + '/storage/'
+
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
