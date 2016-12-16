@@ -7,7 +7,7 @@ from treebeard.mp_tree import MP_Node
 
 from comments_test.core.models import TimeStampableMixin
 
-__all__ = ['Comment']
+__all__ = ['Comment', 'CommentController', 'CommentableMixin']
 
 
 class CommentableMixin(models.Model):
@@ -24,10 +24,10 @@ class CommentableMixin(models.Model):
 class Comment(MP_Node, TimeStampableMixin):
     title = models.CharField(max_length=255)
     text = models.TextField()
-    author = models.ForeignKey(User, related_name='author', blank=False)
+    author = models.ForeignKey(User, related_name='author', blank=False, db_index=True)
 
-    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    object_id = models.PositiveIntegerField()
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, db_index=True)
+    object_id = models.PositiveIntegerField(db_index=True)
     content_object = GenericForeignKey('content_type', 'object_id')
 
     node_order_by = ['created']
