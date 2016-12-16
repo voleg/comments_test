@@ -24,7 +24,7 @@ This could be done in various ways ...
 
 Create API::
 
-  POST /api/comment/ HTTP/1.1
+  POST /api/comment-list/ HTTP/1.1
   Host: example.com
   Accept: application/json, text/javascript
   X-Token: 1
@@ -45,7 +45,7 @@ Create API::
 
 Edit::
 
-  PUT /api/comment/<id>/edit HTTP/1.1
+  PUT /api/comment-detail/<id> HTTP/1.1
   Host: example.com
   Accept: application/json, text/javascript
   X-Token: 1
@@ -65,7 +65,7 @@ Edit::
 
 Delete::
 
-  DELETE /api/comment/<id> HTTP/1.1
+  DELETE /api/comment-detail/<id> HTTP/1.1
   Host: example.com
   Accept: application/json, text/javascript
   X-Token: 1
