@@ -30,7 +30,7 @@ Create API::
   X-Token: 1
 
   {
-    'object_name': 'name',
+    'object_type': 'object.type',
     'object_id': 'id',
     'title': 'title',
     'body': 'body_text',
@@ -51,7 +51,7 @@ Edit::
   X-Token: 1
 
   {
-    'object_name': 'name',
+    'object_type': 'object.type',
     'object_id': 'id',
     'title': 'title',
     'body': 'body_text'
