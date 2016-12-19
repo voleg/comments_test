@@ -46,7 +46,8 @@ Create API::
   { 'comment_id': 'id' }
 
 
-`http POST localhost:8000/api/comment/ Authorization:'Token <token>' title='title' text='text' object_id='1' object_type='blog.post'`
+  $ http POST localhost:8000/api/comment/ Authorization:'Token <token>' title='title' text='text' object_id='1' object_type='blog.post'
+
 
 Edit::
 
