@@ -24,10 +24,10 @@ This could be done in various ways ...
 
 Create API::
 
-  POST /api/comment-list/ HTTP/1.1
+  POST /api/comment/ HTTP/1.1
   Host: example.com
   Accept: application/json, text/javascript
-  X-Token: 1
+  Authorization: 1
 
   {
     'object_type': 'object.type',
@@ -43,12 +43,14 @@ Create API::
   { 'comment_id': 'id' }
 
 
+`http POST localhost:8000/api/comment/ Authorization:'Token <token>' title='title' text='text' object_id='1' object_type='blog.post'`
+
 Edit::
 
   PUT /api/comment-detail/<id> HTTP/1.1
   Host: example.com
   Accept: application/json, text/javascript
-  X-Token: 1
+  Authorization: 1
 
   {
     'object_type': 'object.type',
@@ -68,7 +70,7 @@ Delete::
   DELETE /api/comment-detail/<id> HTTP/1.1
   Host: example.com
   Accept: application/json, text/javascript
-  X-Token: 1
+  Authorization: 1
 
   HTTP/1.1 200 OK
   Vary: Accept
