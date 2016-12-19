@@ -1,6 +1,9 @@
 An example comments backend
 ===========================
 
+.. image:: https://travis-ci.org/voleg/comments_test.svg?branch=develop
+    :target: https://travis-ci.org/voleg/comments_test
+
 Iterations
 ----------
 
